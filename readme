@@ -1,1 +1,32 @@
 Fix WTT - Pack 'n' Strap 2.0.4
+The WTT-PackNStrap 2.0.4 source was modified to prevent the mod from interfering with SPT's insurance system.
+
+The change in WTTPackNStrap.cs consists of removing the activation of HandleInsuredItemLostEventPatch.
+
+Before:
+new HandleInsuredItemLostEventPatch().Enable();
+
+After:
+The line is removed.
+
+IsItemKeptAfterDeathPatch remains enabled, so PackNStrap keeps its functionality related to items that should be retained after death.
+
+The HandleInsuredItemLostEventPatch.cs file is not deleted from the project; it is simply no longer enabled.
+
+This allows PackNStrap to continue providing its items and functionality while leaving the processing of insured items entirely to SPT's vanilla Insurance system.
+
+Result:
+
+PackNStrap → mod items and functionality.
+
+SPT InsuranceService → insurance management.
+
+SPT's vanilla insurance behavior is not modified.
+This is the explanation what I've done in WTT-PackNStrap.dll 
+The DLL was changed to stop PackNStrap from modifying SPT's insurance system.
+
+The HandleInsuredItemLostEventPatch is no longer enabled by the DLL.
+
+The rest of PackNStrap remains unchanged. The mod items, belts, containers, and IsItemKeptAfterDeathPatch still work normally.
+
+This means SPT handles insurance normally, without PackNStrap changing the insured items after a raid and stop blocking the game. 
